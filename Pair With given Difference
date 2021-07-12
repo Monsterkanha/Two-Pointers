@@ -1,5 +1,6 @@
 1. Sort the array and then use two pointer to run
 if diff is lesser then we need to move our j, else we need to move our i pointer.
+When we have to deal with difference this is best approach and decide whether to increase i or j.
 
 
 int Solution::solve(vector<int> &A, int B) {
