@@ -1,0 +1,20 @@
+Resize array A and start from backward traverse, which one is bigger move that to end of array A.
+
+void Solution::merge(vector<int> &A, vector<int> &B) {
+    int n = A.size() , m = B.size();
+    for(int i = 0 ; i < m ; i++){
+        A.push_back(0);
+    }
+    int i = n-1, j = m-1 ,  k= n+m -1;
+    while(i >=0 && j >= 0){
+        if(A[i] >= B[j]){
+            A[k--] = A[i--];
+        }
+        else{
+            A[k--] = B[j--];
+        }
+    }
+    while(j >= 0){
+        A[k--] = B[j--];
+    }
+}
