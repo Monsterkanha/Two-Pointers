@@ -1,0 +1,25 @@
+Here, fix ith position and then do two pointer on right of it.
+
+vector<vector<int> > Solution::threeSum(vector<int> &A) {
+    vector<vector<int>> ans;
+    sort(A.begin() , A.end());
+    int n = A.size();
+    for(int i = 0 ; i < n-2; i++){
+        if(i == 0 || (i > 0 && A[i] != A[i-1])){
+            int lo = i+1, hi = n-1;
+            long target = -1LL*A[i];
+            while(lo < hi){
+                if((long)A[lo] + (long)A[hi] == target){
+                    ans.push_back({A[i] , A[lo] , A[hi]});
+                    while(lo < hi && A[lo] == A[lo+1]) lo++;
+                    while(lo < hi && A[hi] == A[hi-1]) hi--;
+
+                    lo++, hi--;
+                }
+                else if((long)A[lo] + (long)A[hi] < target) lo++;
+                else hi--;
+            }
+        }
+    }
+    return ans;
+}
