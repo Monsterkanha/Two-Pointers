@@ -1,0 +1,19 @@
+assume every index as last point and how many can satisfy.
+Trick start r from i-1, and if at current r condition satisfy then it will satisfy for llin range l to r. so add this to answer 
+
+int Solution::nTriang(vector<int> &A) {
+    sort(A.begin(), A.end());
+    int n = A.size() , mod = 1e9 + 7;
+    long ans = 0;
+    for(int i = n-1; i >= 2; i--){
+        int l = 0 , r = i-1;
+        while(l < r){
+            if(A[l] + A[r] > A[i]){
+                ans = (ans + r - l)%mod;
+                r--;
+            }
+            else l++;
+        }
+    }
+    return ans;
+}
