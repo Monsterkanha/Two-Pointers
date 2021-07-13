@@ -1,0 +1,16 @@
+Use three pointer to propogate the one which is minimum it is good to increase that.
+If we increase our maximum then difference will increase if we increase then chances differnce could increase.
+Since maximum and minimum are that only so difference can only increase if we move second or third.
+
+int Solution::minimize(const vector<int> &A, const vector<int> &B, const vector<int> &C) {
+    int ans = INT_MAX;
+    for(int i = 0 , j = 0 , k =0 ; i < A.size() && j < B.size() && k < C.size(); ){
+        int mn = min(C[k] , min(A[i] , B[j]));
+        int mx = max(C[k] , max(A[i] , B[j]));
+        ans = min(ans , mx - mn);
+        if(mn == A[i])  i++;
+        else if(mn == B[j]) j++;
+        else k++;
+    }
+    return ans;
+}
