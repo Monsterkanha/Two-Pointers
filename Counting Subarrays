@@ -1,0 +1,34 @@
+Use sliding window
+We use two pointers start and end to represent starting and ending point of sliding window. (Not that we need to find contiguous parts).
+
+Initially both start and end point to the beginning of the array, i.e. index 0. Now, let’s try to add a new element el.
+There are two possible conditions.
+
+1st case :
+If sum is less than B, increment end by one position. So contiguous arrays this step produce are (end – start). We also add el to previous sum. There are as many such arrays as the length of the window.
+
+2nd case :
+If sum becomes greater than or equal to B, this means we need to subtract starting element from sum so that the sum again becomes less than B. So we adjust the window’s left border by incrementing start.
+
+We follow the same procedure until end < array size.
+
+if sum is lesser then we add to result this length , important when we are again reattaining condition from i increment make sure to add that to answer too.
+int Solution::solve(vector<int> &A, int B) {
+    int n = A.size(), ans = 0;
+    int i = 0 , j = 0 ,sum = 0;
+    while(j < n){
+        sum += A[j];
+        if(sum < B){
+            ans += (j - i +1);
+        }
+        else{
+            while(sum >= B){
+                sum -= A[i++];
+            }
+            ans += (j- i+1);
+        }
+        j++;
+    }
+    // ans += (j- i);
+    return ans;
+}
