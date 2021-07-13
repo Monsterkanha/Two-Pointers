@@ -1,0 +1,24 @@
+Use Two pointer method, one to expand the window and other to compensate.
+vector<int> Solution::maxone(vector<int> &A, int B) {
+    int n = A.size();
+    int i = 0 , j = 0 , ans = INT_MIN , cnt = 0 , start;
+    
+    while(j < n){
+        if(A[j] == 0) cnt++;
+        while(i < n && cnt > B){
+            if(A[i] == 0) cnt--;
+            i++;
+        }
+        if(ans < j - i + 1){
+            ans = j- i +1;
+            start = i;
+        }
+        j++;
+    }
+    vector<int> res;
+    for(int i = 0; i < ans ; i++){
+        res.push_back(i+start);
+    }
+    return res;
+
+}
