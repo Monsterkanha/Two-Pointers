@@ -1,0 +1,43 @@
+int Solution::solve(vector<int> &A, int B) {
+    int n = A.size();
+    vector<int> pos{-1};
+    for(int i = 0 ; i < n; i++){
+        if(A[i] == 0){
+            pos.push_back(i);
+        }
+    }
+    pos.push_back(n);
+    if(pos.size() == 2){
+        return n;
+    }
+    if(B > pos.size() - 2){
+        return n;
+    }
+    int ans = INT_MIN;
+    for(int i = 1; i < pos.size() - B ; i++){
+        ans = max(ans, pos[i+B] - pos[i-1] - 1);
+    }
+    return ans;
+}
+
+
+2. use two pointer l and r where we expand window with r and contract with l.
+Here, we first go to maintain atmost B zeroes condition if condition exceed then we take help from i to move forward and 
+restore the condition.
+
+int Solution::solve(vector<int> &A, int B) {
+    int n = A.size();
+    int i = 0 , j = 0 , ans = INT_MIN , cnt = 0;
+    while(j < n){
+        if(A[j] == 0){
+            cnt++;
+        }
+        while(cnt > B){
+            if(A[i] == 0) cnt--;
+            i++;
+        }
+        ans = max(ans, j - i +1);
+        j++;
+    }
+    return ans;
+}
